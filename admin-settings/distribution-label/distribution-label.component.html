@@ -1,0 +1,29 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">CasinoCoin distribution settings</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive_dummy">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <div class="form-group row" *ngFor="let data of distributlabel;let i = index">
+                            <label for="" class="col-sm-2 col-form-label">{{data.rank}}</label>
+                            <div class="col-sm-10">
+                                <input (keyup)="checkPriorValidation(i, data.eveon_claim)" type="number"
+                                    class="form-control  form-control-sm" [(ngModel)]="data.eveon_claim" min="0">
+                                <div *ngIf="!data.eveon_claim" class="text-danger text-left">Enter valid value</div>
+                                <div *ngIf="error[i] != ''" class="text-danger text-left">{{error[i]}}
+                                </div>
+                            </div>
+                        </div>
+                        <button [disabled]="isNotVaild || isDisabel" type="submit" (click)="updateData()"
+                            class="btn btn-primary">Update</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

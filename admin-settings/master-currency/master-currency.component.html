@@ -1,0 +1,39 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Max Bet</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive_dummy">
+            <div *ngIf="currencyFormGroup.value && currencyFormGroup.value.currencies" id="dataTable_wrapper"
+                class="dataTables_wrapper dt-bootstrap4">
+                <form [formGroup]="currencyFormGroup" (ngSubmit)="updateData(currencyFormGroup.value)">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group row"
+                                *ngFor="let currencies of currencyFormGroup.controls.currencies['controls']; let i = index"
+                                [formGroup]="currencies">
+
+                                <label for="max_bet_amount_array"
+                                    class="col-sm-2 col-form-label">{{currencies.controls.name.value}}</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" formControlName="max_bet_amount" min="0">
+                                    <input type="hidden" class="form-control" formControlName="id">
+                                    <div class="text-danger "
+                                        *ngIf="currencies.controls['max_bet_amount'].touched && currencies.controls['max_bet_amount'].hasError('required') ">
+                                        {{maxBitAmountError.amount.required}} </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="col-sm-12 m-0 p-0">
+                        <button type="submit" [disabled]="!currencyFormGroup.valid"
+                            class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

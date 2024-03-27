@@ -1,0 +1,50 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Weekly Prize</h6>
+    </div>
+
+    <div class="card-body">
+        <form [formGroup]="distributedAmountForm" (ngSubmit)="addData(distributedAmountForm.value)">
+            <div class="form-group row">
+                <label for="distribution_currency" class="col-sm-2 col-form-label">Currency</label>
+                <div class="col-sm-10">
+                    <select [(ngModel)]="distribution_currency" name="key" class="form-control form-control-sm"
+                        [formControl]="distributedAmountForm.controls['distribution_currency']">
+                        <option value="">Select Currency</option>
+                        <option *ngFor="let currancy of currency" value="{{currancy.code}}">{{currancy.name}}</option>
+                    </select>
+                    <div *ngIf="distributedAmountForm.controls['distribution_currency'].hasError('required') && distributedAmountForm.controls['distribution_currency'].touched"
+                        class="text-danger text-left">{{distributedAmountError.currency.required}}</div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="distribution_amount" class="col-sm-2 col-form-label">Amount</label>
+                <div class="col-sm-10">
+                    <input type="number" [(ngModel)]="distribution_amount" class="form-control" min="0"
+                        [formControl]="distributedAmountForm.controls['distribution_amount']" id="distribution_amount">
+                    <div *ngIf="distributedAmountForm.controls['distribution_amount'].hasError('required') && distributedAmountForm.controls['distribution_amount'].touched"
+                        class="text-danger text-left">{{distributedAmountError.amount.required}}</div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="Commission" class="col-sm-2 col-form-label">Commission</label>
+                <div class="col-sm-10">
+                    <input type="number" [(ngModel)]="Commission" class="form-control"
+                        [formControl]="distributedAmountForm.controls['Commission']" id="Commission" min="0">
+                    <div *ngIf="distributedAmountForm.controls['Commission'].hasError('required') && distributedAmountForm.controls['Commission'].touched"
+                        class="text-danger text-left">{{distributedAmountError.commission.required}}</div>
+                    <div *ngIf="distributedAmountForm.controls['Commission'].hasError('invalidComm') && distributedAmountForm.controls['Commission'].touched"
+                        class="text-danger text-left">{{distributedAmountError.commission.invalidComm}}</div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 p-0 m-0">
+                <button [disabled]="!distributedAmountForm.valid" type="submit"
+                    class="btn btn-primary">Update</button>
+            </div>
+            <!-- (click)="addData()" -->
+        </form>
+    </div>
+</div>

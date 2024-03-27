@@ -1,0 +1,14 @@
+<div class="countdown">
+  <p class="measurements-number">Race ends in :</p>
+  <div
+    *ngFor="let time of display; let i = index"
+    class="measurements {{time}}"
+  >
+    <p class="measurements-number">
+      {{ (showZero && displayNumbers[i] < 10) ? '0' + displayNumbers[i].trim() :
+      displayNumbers[i]}}&nbsp;
+      <span class="divider">{{time}}</span>
+    </p>
+  </div>
+</div>
+<ng-content></ng-content>

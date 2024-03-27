@@ -1,0 +1,37 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">VIP Casino Coin Distribution</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive_dummy">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <div class="form-group row">
+                            <!-- <label for="" class="col-sm-2 col-form-label">VIP Label</label> -->
+                            <div class="col-sm-2">
+                                VIP Label
+                            </div>
+                            <div class="col-sm-10">
+                                Form
+                            </div>
+                        </div>
+                        <div class="form-group row" *ngFor="let data of vipLabelData;let i =index">
+                            <label for="" class="col-sm-2 col-form-label">{{data.label}}</label>
+                            <div class="col-sm-10">
+                                <input (keyup)="checkPriorValidation(i, data.from)" type="number"
+                                    class="form-control form-control-sm" [(ngModel)]="data.from"  min="0">
+                                    <div *ngIf="!data.from" class="text-danger text-left">Enter valid value</div>
+                                <div *ngIf="error[i] != ''" class="text-danger text-left">{{error[i]}}
+                                </div>
+                            </div>
+                        </div>
+                        <button [disabled]="isDisabel || isNotVaild" type="submit" (click)="updateVipLabels()"
+                            class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

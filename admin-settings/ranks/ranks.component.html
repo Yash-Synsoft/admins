@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="card-header py-3 bg-white text-primary">
+    <h6 class="m-0 font-weight-bold">Ranks Setting</h6>
+  </div>
+  <div class="card-body">
+    <div *ngFor="let label of ranksData; let i = index" class="card mb-4">
+      <div class="card-header bg-secondary text-white">
+        <h6 class="m-0">{{ label.rank }}</h6>
+      </div>
+      <div class="card-body text-dark">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label"><strong>Rakeback:</strong></label>
+          <div class="col-sm-6">
+            <input (keyup)="checkPriorValidation(i, label.rakeback)" type="number" class="form-control form-control-sm"
+              [(ngModel)]="label.rakeback" min="0">
+            <div *ngIf="!label.eveon_claim" class="text-danger text-left">Enter valid value</div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label"><strong>Seeds:</strong></label>
+          <div class="col-sm-6">
+            <input (keyup)="checkPriorValidation(i, label.seeds)" type="number" class="form-control form-control-sm"
+              [(ngModel)]="label.seeds" min="0">
+            <div *ngIf="!label.eveon_claim" class="text-danger text-left">Enter valid value</div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label"><strong>Eveon Claim:</strong></label>
+          <div class="col-sm-6">
+            <input (keyup)="checkPriorValidation(i, label.eveon_claim)" type="number"
+              class="form-control form-control-sm" [(ngModel)]="label.eveon_claim" min="0">
+            <div *ngIf="!label.eveon_claim" class="text-danger text-left">Enter valid value</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-right">
+        <button class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

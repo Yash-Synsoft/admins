@@ -1,0 +1,161 @@
+<!-- <div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Wallet</h6>
+  </div>
+
+  <div class="card-body">
+    <form
+      [formGroup]="pullCurrencyForm"
+      (ngSubmit)="pullCurrency(pullCurrencyForm.value)"
+    >
+      <div class="form-group row">
+        <label for="currency" class="col-sm-2 col-form-label">Currency</label>
+        <div class="col-sm-10">
+          <select
+            [(ngModel)]="selected_currency"
+            name="key"
+            class="form-control form-control-sm"
+            [formControl]="pullCurrencyForm.controls['currency']"
+          >
+            <option value="">Select Currency Label</option>
+            <option *ngFor="let elem of currency" value="{{ elem.code }}">
+              {{ elem.name }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              pullCurrencyForm.controls['currency'].hasError('required') &&
+              pullCurrencyForm.controls['currency'].touched
+            "
+            class="text-danger text-left"
+          >
+            {{ pullCurrencyError.currency.required }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 p-0 m-0">
+        <button
+          [disabled]="!pullCurrencyForm.valid || disableButton"
+          type="submit"
+          class="btn btn-primary"
+        >
+          Pull
+        </button>
+      </div>
+    </form>
+  </div>
+</div> -->
+<div class="container">
+  <div class="row">
+    <div
+      class="modal-title title_font drag-grid-card col-md-12 col-sm-12 float-right"
+      style="margin-bottom: 10px"
+    >
+      <button
+        type="button"
+        (click)="reload()"
+        class="btn btn-primary float-right"
+      >
+        Refresh
+      </button>
+    </div>
+
+    <div *ngFor="let bal of adminBal" class="col-sm">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">{{ bal.code }}</h6>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive_dummy">
+            <div
+              id="dataTable_wrapper"
+              class="dataTables_wrapper dt-bootstrap4"
+            >
+              <div class="row">
+                <div class="col-sm-12">
+                  <p>
+                    {{ bal.balance }}
+                    <img
+                      style="width: 25px"
+                      src="{{
+                        bal.code ? '/assets/images/' + bal.code + '.svg' : ''
+                      }}"
+                      alt=""
+                      class="img-fluid"
+                    />
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 p-0 m-0 justify-content-center">
+              <button
+                type="submit"
+                [disabled]="bal.balance == '0.00000000' || bal.balance <= 0"
+                (click)="checkForPassword(bal.code)"
+                class="btn btn-primary"
+                style="margin-left: 30%;"
+              >
+                Pull
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Logout Modal  -->
+<ng-template #passwordModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Password</h5>
+    <button
+      (click)="closeModal()"
+      class="close"
+      type="button"
+      data-dismiss="modal"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-body">
+      <form
+        [formGroup]="pullCurrencyForm"
+        (ngSubmit)="pullCurrency(pullCurrencyForm.value)"
+      >
+        <div class="form-group row">
+          <label for="currency" class="col-sm-2 col-form-label">Password</label>
+          <div class="col-sm-10">
+            <input
+              type="password"
+              name="key"
+              class="form-control form-control-sm"
+              [formControl]="pullCurrencyForm.controls['password']"
+            />
+            <div
+              *ngIf="
+                pullCurrencyForm.controls['password'].hasError('required') &&
+                pullCurrencyForm.controls['password'].touched
+              "
+              class="text-danger text-left"
+            >
+              {{ pullCurrencyError.password.required }}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 p-0 m-0" style="text-align: center!important;">
+          <button
+            [disabled]="!pullCurrencyForm.valid"
+            type="submit"
+            class="btn btn-primary"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
